@@ -11,6 +11,7 @@ class Ability
     if user&.class == User
       can :manage, User, id: user.id
       can :cr, Application, user_id: user.id
+      can :read, Application
       can :read, Chat, user_id: user.id
       can :read, Message, sender_id: user.id
     elsif user&.class == Admin

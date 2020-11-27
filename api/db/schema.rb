@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20201127170421) do
     t.string "unit", null: false
     t.string "email", null: false
     t.string "push_token"
+    t.boolean "verify", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

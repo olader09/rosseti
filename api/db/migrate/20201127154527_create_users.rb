@@ -9,6 +9,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.string :unit, null: false
       t.string :email, null: false
       t.string :push_token
+      t.boolean :verify, default: false
       t.timestamps
     end
   end
