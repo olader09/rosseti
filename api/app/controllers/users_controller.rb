@@ -17,12 +17,11 @@ class UsersController < APIBaseController
   end
 
   def create
-      @user = User.create(create_user_params)
-      if @user.errors.blank?
-        render json: @user, status: :ok
-      else
-        render json: @user.errors, status: :bad_request
-      end
+    @user = User.create(create_user_params)
+    if @user.errors.blank?
+      render json: @user, status: :ok
+    else
+      render json: @user.errors, status: :bad_request
     end
   end
 
