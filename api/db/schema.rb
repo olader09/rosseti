@@ -54,7 +54,6 @@ ActiveRecord::Schema.define(version: 20201127170421) do
     t.bigint "sender_id"
     t.bigint "chat_id"
     t.string "picture"
-    t.string "string"
     t.integer "type_message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
