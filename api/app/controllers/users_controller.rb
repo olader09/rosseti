@@ -10,7 +10,7 @@ class UsersController < APIBaseController
   def update
     @user.update(update_user_params)
     if @user.errors.blank?
-      render json: @user, status: :ok
+      render json: @user.to_json(except: %i[password_digest push_token]), status: :ok
     else
       render json: @user.errors, status: :bad_request
     end
@@ -19,7 +19,7 @@ class UsersController < APIBaseController
   def create
     @user = User.create(create_user_params)
     if @user.errors.blank?
-      render json: @user, status: :ok
+      render json: @user.to_json(except: %i[password_digest push_token]), status: :ok
     else
       render json: @user.errors, status: :bad_request
     end
