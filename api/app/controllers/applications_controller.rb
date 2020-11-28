@@ -91,6 +91,7 @@ class ApplicationsController < APIBaseController
           tie_breaker: 0.5
         }
       }}).to_a
+      similars.delete_at(0)
       p "============================================="
       p similars
       p similars.empty?
@@ -99,9 +100,7 @@ class ApplicationsController < APIBaseController
         @application.update(uniqueness: 100) 
         render status: :no_content
       else
-        similars.delete_at(0)
         similars = similars.take(3)
-
         scores = similars.map {|similar| similar['_score']}
         total_score = 0.0
         scores.each {|score| total_score += score}
