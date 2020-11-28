@@ -1,9 +1,9 @@
 class ApplicationsController < APIBaseController
-  load_and_authorize_resource
+  authorize_resource
   before_action :auth_user
 
   def index
-    @applications = @applications.order(:id).page(params[:page])
+    @applications = Application.all.order(:id).page(params[:page])
     if @applications.empty?
       render status: 204
     else
@@ -31,7 +31,7 @@ class ApplicationsController < APIBaseController
   end
 
   def create
-    @application = @application.new(create_application_params)
+    @application = Application.new(create_application_params)
     @application.user_id = current_user.id
     @application.save
     if @application.errors.blank?
