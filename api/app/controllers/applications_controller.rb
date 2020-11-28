@@ -32,7 +32,9 @@ class ApplicationsController < APIBaseController
   end
 
   def create
-    @application = Application.create(create_application_params)
+    @application = Application.new(create_application_params)
+    @application.user = current_user.id
+    @application.save
     if @application.errors.blank?
       render json: @application, status: :ok
     else
@@ -65,7 +67,7 @@ class ApplicationsController < APIBaseController
 
   def create_application_params
     params.required(:application).permit(
-      *default_application_fields, :user_id
+      *default_application_fields
     )
   end
 end
