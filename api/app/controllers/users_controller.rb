@@ -1,5 +1,5 @@
 class UsersController < APIBaseController
-  before_action :load_user, :auth_user, except: %i[create]
+  before_action :load_user, :auth_user, :verifing_user, except: %i[create]
   authorize_resource except: %i[create]
 
   def show
@@ -28,6 +28,10 @@ class UsersController < APIBaseController
 
   def load_user
     @user = current_user
+  end
+  
+  def verifing_user
+    current_user.update(verify: true) if current_user.verify == false
   end
 
   def default_user_fields
