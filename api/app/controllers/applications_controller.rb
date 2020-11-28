@@ -1,6 +1,6 @@
 class ApplicationsController < APIBaseController
-  authorize_resource except: %i[like]
-  before_action :auth_user, except: %i[like]
+  authorize_resource
+  before_action :auth_user
 
   def index
     applications = Application.all.order(:id).page(params[:page])
