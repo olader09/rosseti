@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resource :user
 
   resources :applications do
-    put 'like/:id', to: 'applications#like', on: :member
+    put :like, to: 'applications#like', on: :member
   end
   resources :messages
   resources :chats
