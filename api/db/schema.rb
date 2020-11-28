@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201128130028) do
+ActiveRecord::Schema.define(version: 20201128130323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,10 +26,19 @@ ActiveRecord::Schema.define(version: 20201128130028) do
   create_table "applications", force: :cascade do |t|
     t.bigint "user_id"
     t.string "title", null: false
-    t.text "text", null: false
     t.integer "rating", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "category", default: ""
+    t.string "problem", default: ""
+    t.string "decision", default: ""
+    t.string "impact", default: ""
+    t.boolean "economy", default: false
+    t.jsonb "other_authors"
+    t.jsonb "expenses"
+    t.jsonb "stages"
+    t.string "file"
+    t.string "doc_app"
     t.index ["user_id"], name: "index_applications_on_user_id"
   end
 
@@ -38,16 +47,6 @@ ActiveRecord::Schema.define(version: 20201128130028) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["application_id"], name: "index_chats_on_application_id"
-  end
-
-  create_table "experts", force: :cascade do |t|
-    t.string "name"
-    t.string "password_digest"
-    t.string "email", null: false
-    t.string "unit", null: false
-    t.string "push_token"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "messages", force: :cascade do |t|

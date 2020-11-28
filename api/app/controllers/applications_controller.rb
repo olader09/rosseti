@@ -1,6 +1,5 @@
 class ApplicationsController < APIBaseController
   authorize_resource except: %i[index show]
-
   before_action :auth_user, except: %i[index show]
 
   def index
@@ -56,7 +55,7 @@ class ApplicationsController < APIBaseController
   protected
 
   def default_application_fields
-    %i[title text]
+    %i[title category problem decision impact economy other_authors expenses stages file]
   end
 
   def update_application_params
