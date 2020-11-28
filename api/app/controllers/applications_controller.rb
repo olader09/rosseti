@@ -1,5 +1,5 @@
 class ApplicationsController < APIBaseController
-  authorize_resource except: %i[index show]
+  authorize_resource except: %i[like]
   before_action :auth_user, except: %i[index show]
 
   def index
