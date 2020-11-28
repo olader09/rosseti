@@ -64,6 +64,18 @@ class ApplicationsController < APIBaseController
     end
   end
 
+  def dislike
+    @application = Application.find(params[:id])
+    if @application.likes.where(user_id: current_user.id, application_id: @application.id).blank?
+      render json: @application, status: 208
+    else
+      @application.likes.where(user_id: current_user.id, application_id: @application.id).delete_all
+      @application.count_likes = @application.users.count
+      @application.save
+      render json: @application, status: :ok
+    end
+  end
+
   protected
 
   def default_application_fields

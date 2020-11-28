@@ -3,9 +3,8 @@ class Ability
 
   def initialize(user)
     alias_action :create, :read, :update, :destroy, to: :crud
-    alias_action :create, :read, :destroy, to: :crd
-    alias_action :create, :read, :update, to: :cru
     alias_action :create, :read, to: :cr
+    alias_action :like, :dislike, to: :liking
 
 
     user ||= User.new
@@ -13,7 +12,7 @@ class Ability
     if user&.class == User
       can :manage, User, id: user.id
       can :cr, Application
-      can :like, Application
+      can :liking, Application
       can :read, Chat
       can :read, Message
     elsif user&.class == Admin
