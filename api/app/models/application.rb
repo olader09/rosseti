@@ -3,6 +3,11 @@ class Application < ApplicationRecord
 
   has_one :chat, dependent: :destroy
   belongs_to :user
+  has_many :likes
+  has_many :users, through: :likes
+
+  mount_uploader :file, ApplicationFilesUploader
+  mount_base64_uploader :file, ApplicationFilesUploader
 
   def as_json(_options = {})
     {
@@ -21,6 +26,9 @@ class Application < ApplicationRecord
       updated_at: updated_at,
       chat: {
         id: chat.id
+      },
+      liked_by:{
+        users.to_json
       }
     }
   end
