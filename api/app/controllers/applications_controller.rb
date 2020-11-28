@@ -79,7 +79,7 @@ class ApplicationsController < APIBaseController
   def similar
     problem = @application.problem
     title = @application.title
-    result = Application.search({
+    similars = Application.search({
       min_score: 3,
       query: {
         dis_max: {
@@ -90,10 +90,21 @@ class ApplicationsController < APIBaseController
           tie_breaker: 0.5
         }
       }}).to_a
+      if similars.empty?
+        @application.update(uniqueness: 100) 
+        render status: :no_content
+      else
+        similars.delete_at(0)
+        similars = similars.take(3)
 
-      scores = result.map {|res| res['_score']}
-      p scores
-    render json: result
+        scores = similars.map {|similar| similar['_score']}
+        total_score = 0.0
+        scores.each {|score| total_score += score}
+        total_score = (total_score / 3) * 100 / 73
+        
+        @application.update(uniqueness: total_score)
+        render json: similars
+      end
   end
 
   protected
