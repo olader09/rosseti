@@ -6,6 +6,7 @@ class CreateApplications < ActiveRecord::Migration[5.1]
       t.text :text, null: false
       t.integer :rating, default: 0
       t.timestamps
+      
     end
   end
 end
