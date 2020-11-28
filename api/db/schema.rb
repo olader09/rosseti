@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201128130323) do
+ActiveRecord::Schema.define(version: 20201128143939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20201128130323) do
     t.index ["application_id"], name: "index_chats_on_application_id"
   end
 
+<<<<<<< HEAD
   create_table "experts", force: :cascade do |t|
     t.string "name"
     t.string "password_digest"
@@ -57,6 +58,15 @@ ActiveRecord::Schema.define(version: 20201128130323) do
     t.string "push_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+=======
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "application_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["application_id"], name: "index_likes_on_application_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+>>>>>>> a824797b841e64b913302a37e6df76fdd2683455
   end
 
   create_table "messages", force: :cascade do |t|
