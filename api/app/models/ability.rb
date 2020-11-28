@@ -12,7 +12,7 @@ class Ability
 
     if user&.class == User
       can :manage, User, id: user.id
-      can :cru, Application
+      can :cr, Application
       can :like, Application
       can :read, Chat
       can :read, Message
