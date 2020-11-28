@@ -18,7 +18,7 @@ class Application < ApplicationRecord
       doc_app: doc_app,
       count_likes: 0,
       created_at: created_at,
-      updated_at: updatedtypi_at,
+      updated_at: updated_at,
       chat: {
         id: chat.id
       }
