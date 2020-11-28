@@ -52,6 +52,16 @@ class ApplicationsController < APIBaseController
     end
   end
 
+  def like
+    @application = Application.find(params[:id])
+    if @application.likes.where(user_id: current_user.id, application_id: @application.id).blank?
+      @application.users << current_user
+      render json: @application, status: :ok
+    else
+      render json: @application, status: 208
+    end
+  end
+
   protected
 
   def default_application_fields

@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   post :user_token, to: 'user_token#create'
   resource :user
 
-  resources :applications
+  resources :applications do
+    put :like, on: :member
+  end
   resources :messages
   resources :chats
 
