@@ -22,7 +22,7 @@ class RoomChannel < ApplicationCable::Channel
     new_message = Message.new(content: content, sender: current_user, chat_id: chat_id, picture: picture, type_message: type_message)
     return unless new_message.save
 
-    ActionCable.server.broadcast room_id, message: content, picture: new_message.picture, type_message: type_message, sender_type: new_message.sender_type, created_at: new_message.created_at
+    ActionCable.server.broadcast room_id, message: content, picture: new_message.picture, type_message: type_message, sender_type: new_message.sender_type, sender_id: new_message.sender_id, created_at: new_message.created_at
    
   end
 
