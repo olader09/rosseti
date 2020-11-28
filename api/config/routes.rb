@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :applications do
     put :like, to: 'applications#like', on: :collection
+    put :dislike, to: 'applications#dislike', on: :collection
   end
   resources :messages
   resources :chats
