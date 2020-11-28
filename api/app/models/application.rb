@@ -21,7 +21,7 @@ class Application < ApplicationRecord
       stages: stages,
       file: file,
       doc_app: doc_app,
-      count_likes: 0,
+      count_likes: count_likes,
       created_at: created_at,
       updated_at: updated_at,
       id_likers: users.pluck(:id),

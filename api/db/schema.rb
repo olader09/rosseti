@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20201128143939) do
     t.index ["application_id"], name: "index_chats_on_application_id"
   end
 
+<<<<<<< HEAD
   create_table "experts", force: :cascade do |t|
     t.string "name"
     t.string "password_digest"
@@ -59,6 +60,8 @@ ActiveRecord::Schema.define(version: 20201128143939) do
     t.datetime "updated_at", null: false
   end
 
+=======
+>>>>>>> 8c87f6654fb539a6969c232877f0bb7e300871c2
   create_table "likes", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "application_id"
