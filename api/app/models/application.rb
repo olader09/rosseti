@@ -24,7 +24,7 @@ class Application < ApplicationRecord
       count_likes: 0,
       created_at: created_at,
       updated_at: updated_at,
-      liked_by: users.pluck(:id, :name, :surname, :second_name),
+      id_likers: users.pluck(:id),
       chat: {
         id: chat.id
       }
