@@ -1,7 +1,6 @@
 class UsersController < APIBaseController
-  before_action :load_user, except: %i[create]
+  before_action :load_user, :auth_user, except: %i[create]
   authorize_resource except: %i[create]
-  before_action :auth_user, except: %i[create]
 
   def show
     render json: @user.to_json(except: %i[password_digest push_token])

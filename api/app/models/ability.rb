@@ -12,16 +12,14 @@ class Ability
       can :manage, User, id: user.id
       can :cr, Application, user_id: user.id
       can :read, Application
-      can :read, Chat, user_id: user.id
-      can :read, Message, sender_id: user.id
+      can :read, Chat
+      can :read, Message
     elsif user&.class == Admin
       can :manage, Application
       can :manage, User
       can :manage, Admin
-      can :manage, Expert
-    elsif user&.class == Expert
-      can :manage, Application
-      can :read, User
+      can :manage, Message
+      can :manage, Chat
     end
   end
 end

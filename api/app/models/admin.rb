@@ -1,13 +1,12 @@
 class Admin < ApplicationRecord
   
-  validates :login, presence: true, uniqueness: { case_sensitive: true }
+  validates :email, presence: true, uniqueness: { case_sensitive: true }
   has_secure_password
 
   def self.from_token_request(request)
-    login = request.params&.[]('auth')&.[]('login')
-    find_by login: login
+    email = request.params&.[]('auth')&.[]('email')
+    find_by email: email
   end
-
 
   def admin?
     true

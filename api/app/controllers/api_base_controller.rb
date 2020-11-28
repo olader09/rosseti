@@ -1,12 +1,10 @@
 class APIBaseController < ActionController::API
   before_action :init_redis
   include Knock::Authenticable
-  # Здесь была рассылка
+
   def current_ability
     @current_ability ||=  if current_admin.present?
                             Ability.new(current_admin)
-                          elsif current_expert.present?
-                            Ability.new(current_expert)
                           else
                             Ability.new(current_user)
                           end
@@ -17,8 +15,6 @@ class APIBaseController < ActionController::API
   def auth_user
     if current_admin.present?
       authenticate_admin
-    elsif current_expert.present?
-      authenticate_expert
     else
       authenticate_user
     end

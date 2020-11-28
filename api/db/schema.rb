@@ -34,18 +34,8 @@ ActiveRecord::Schema.define(version: 20201127170421) do
   end
 
   create_table "chats", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.index ["user_id"], name: "index_chats_on_user_id"
-  end
-
-  create_table "experts", force: :cascade do |t|
-    t.string "name"
-    t.string "password_digest"
-    t.string "email", null: false
-    t.string "unit", null: false
-    t.string "push_token"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.bigint "application_id", null: false
+    t.index ["application_id"], name: "index_chats_on_application_id"
   end
 
   create_table "messages", force: :cascade do |t|

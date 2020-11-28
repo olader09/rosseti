@@ -1,15 +1,12 @@
 class Application < ApplicationRecord
-  
-  validates :email, presence: true, uniqueness: { case_sensitive: true }
-  has_secure_password
+  after_create :init_chat
 
+  has_one :chat, dependent: :destroy
+  belongs_to :user, class_name: "user", foreign_key: "user_id"
 
-  def self.from_token_request(request)
-    email = request.params&.[]('auth')&.[]('email')
-    find_by email: email
-  end
+  private
 
-  def admin?
-    false
+  def init_chat
+    Chat.create(application_id: id)
   end
 end
