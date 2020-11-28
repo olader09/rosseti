@@ -33,7 +33,7 @@ class ApplicationsController < APIBaseController
 
   def create
     @application = Application.new(create_application_params)
-    @application.user = current_user.id
+    @application.user_id = current_user.id
     @application.save
     if @application.errors.blank?
       render json: @application, status: :ok
