@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201128154904) do
+ActiveRecord::Schema.define(version: 20201128221343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,10 @@ ActiveRecord::Schema.define(version: 20201128154904) do
     t.string "file"
     t.string "doc_app"
     t.integer "count_likes", default: 0
+    t.integer "status", default: 0
+    t.integer "popularity", default: 0
+    t.integer "uniqueness", default: 0
+    t.integer "direction_activity", default: 0
     t.index ["user_id"], name: "index_applications_on_user_id"
   end
 
@@ -49,7 +53,6 @@ ActiveRecord::Schema.define(version: 20201128154904) do
     t.datetime "updated_at", null: false
     t.index ["application_id"], name: "index_chats_on_application_id"
   end
-
 
   create_table "likes", force: :cascade do |t|
     t.bigint "user_id"

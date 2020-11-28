@@ -2,4 +2,4 @@
 nginx/ssl/server.crt
 nginx/ssl/server.key
 
-api/db/schema.rb
+/api/db/schema.rb
