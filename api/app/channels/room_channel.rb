@@ -3,6 +3,8 @@ class RoomChannel < ApplicationCable::Channel
 
   def subscribed
     stream_from room_id
+    messages_history = Messages.where(chat_id: chat_id)
+    ActionCable.server.broadcast room_id, messages: messages_history.to_json
   end
 
   def unsubscribed

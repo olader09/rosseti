@@ -2,27 +2,13 @@ class MessagesController < APIBaseController
   authorize_resource
   before_action :auth_user
 
-  def index
-    if current_user.present?
-      messages = Message.where(chat_id: current_user.chat.id).order(created_at: :desc).page(params[:page])
-      if messages.empty?
-        render status: :no_content
-      else
-        render json: messages, status: :ok
-      end
-    end
-  end
-
+ 
   def show
-    if current_superuser.present?
-      messages = Message.where(chat_id: params[:id]).order(created_at: :desc).page(params[:page])
-      if messages.empty?
-        render status: :no_content
-      else
-        render json: messages, status: :ok
-      end
+    messages = Message.where(chat_id: params[:id]).order(created_at: :desc).page(params[:page])
+    if messages.empty?
+      render status: :no_content
     else
-      render json: { "admin": 'no unauthorized' }, status: 401
+      render json: messages, status: :ok
     end
   end
 

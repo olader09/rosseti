@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20201127170421) do
 
   create_table "aplications", force: :cascade do |t|
     t.bigint "user_id"
-    t.string "name", null: false
+    t.string "title", null: false
     t.text "text", null: false
     t.integer "rating", default: 0
     t.datetime "created_at", null: false

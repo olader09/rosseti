@@ -10,8 +10,7 @@ class Ability
 
     if user&.class == User
       can :manage, User, id: user.id
-      can :cr, Application, user_id: user.id
-      can :read, Application
+      can :cr, Application
       can :read, Chat
       can :read, Message
     elsif user&.class == Admin
