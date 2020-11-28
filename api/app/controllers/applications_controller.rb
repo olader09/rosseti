@@ -91,8 +91,10 @@ class ApplicationsController < APIBaseController
           tie_breaker: 0.5
         }
       }}).to_a
+      p "============================================="
       p similars
       p similars.empty?
+      p "============================================="
       if similars.empty?
         @application.update(uniqueness: 100) 
         render status: :no_content
