@@ -56,7 +56,8 @@ class ApplicationsController < APIBaseController
     @application = Application.find(params[:id])
     if @application.likes.where(user_id: current_user.id, application_id: @application.id).blank?
       @application.users << current_user
-      @application.count_likes
+      @application.count_likes = @application.users.count
+      @application.save
       render json: @application, status: :ok
     else
       render json: @application, status: 208
