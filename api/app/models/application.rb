@@ -8,10 +8,20 @@ class Application < ApplicationRecord
     {
       id: id,
       title: title,
-      text: text,
-      updated_at: updated_at,
-      chat_id: chat.id,
-      count_likes: 0
+      problem: problem,
+      decision: decision,
+      economy: economy,
+      other_authors: other_authors,
+      expenses: expenses,
+      stages: stages,
+      file: file,
+      doc_app: doc_app,
+      count_likes: 0,
+      created_at: created_at,
+      updated_at: updatede_at,
+      chat: {
+        id: chat.id
+      }
     }
   end
 
