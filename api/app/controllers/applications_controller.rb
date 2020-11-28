@@ -77,6 +77,7 @@ class ApplicationsController < APIBaseController
   end
 
   def similar
+    @application = Application.find(params[:id])
     problem = @application.problem
     title = @application.title
     similars = Application.search({
