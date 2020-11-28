@@ -12,12 +12,14 @@ services:
       - db
       - redis
       - sidekiq
+      - elasticsearch
     ports:
       - "3333:3333"
     tty: true
     environment:
       - BUNDLE_PATH=/bundle
       - RAILS_ENV=${RAILS_ENV}
+      - TEST_ES_SERVER='http://elasticsearch:9200/'
   db:
     image: postgres:9.6.8-alpine
     volumes:
@@ -32,6 +34,12 @@ services:
       - db
       - redis
     command: bundle exec sidekiq
+  elasticsearch:
+    image: elasticsearch:7.9.3
+    environment:
+      - node.name=es01
+      - cluster.name=es-docker-cluster
+      - discovery.type=single-node
 volumes:
   db-data:
   bundle:

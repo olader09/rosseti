@@ -1,5 +1,14 @@
 class Application < ApplicationRecord
   after_create :init_chat
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
+  settings do
+    mappings dynamic: false do
+      indexes :problem, type: :text, analyzer: :russian
+      indexes :title, type: :text, analyzer: :russian
+    end
+  end
 
   has_one :chat, dependent: :destroy
   belongs_to :user

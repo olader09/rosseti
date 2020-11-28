@@ -1,13 +1,13 @@
 class ApplicationsController < APIBaseController
-  authorize_resource
+  load_and_authorize_resource
   before_action :auth_user
 
   def index
-    applications = Application.all.order(:id).page(params[:page])
-    if applications.empty?
+    @applications.order(:id).page(params[:page])
+    if @applications.empty?
       render status: 204
     else
-      render json: applications
+      render json: @applications
     end
   end
 
@@ -74,6 +74,26 @@ class ApplicationsController < APIBaseController
       @application.save
       render json: @application, status: :ok
     end
+  end
+
+  def similar
+    problem = @application.problem
+    title = @application.title
+    result = Application.search({
+      min_score: 3,
+      query: {
+        dis_max: {
+          queries: [
+            { match: { title: title } },
+            { match: { problem: problem } }
+          ],
+          tie_breaker: 0.5
+        }
+      }}).to_a
+
+      scores = result.map {|res| res['_score']}
+      p scores
+    render json: result
   end
 
   protected
