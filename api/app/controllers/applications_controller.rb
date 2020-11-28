@@ -32,7 +32,7 @@ class ApplicationsController < APIBaseController
   end
 
   def create
-    @application = Application.create(create_application_params)
+    @application = Application.create(create_application_params, user_id: current_user.id)
     if @application.errors.blank?
       render json: @application, status: :ok
     else
@@ -54,7 +54,7 @@ class ApplicationsController < APIBaseController
   protected
 
   def default_application_fields
-    %i[name text rating user_id]
+    %i[name text rating]
   end
 
   def update_application_params
