@@ -2,7 +2,7 @@ class Application < ApplicationRecord
   after_create :init_chat
 
   has_one :chat, dependent: :destroy
-  belongs_to :user, class_name: "user", foreign_key: "user_id"
+  belongs_to :user
 
   def as_json(_options = {})
     {
