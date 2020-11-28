@@ -34,7 +34,6 @@ class ApplicationsController < APIBaseController
   def create
     @application = Application.create(create_application_params)
     if @application.errors.blank?
-      @application.update(user_id: current_user.id)
       render json: @application, status: :ok
     else
       render json: @application.errors, status: :bad_request
@@ -66,7 +65,7 @@ class ApplicationsController < APIBaseController
 
   def create_application_params
     params.required(:application).permit(
-      *default_application_fields
+      *default_application_fields, :user_id
     )
   end
 end
