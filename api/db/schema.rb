@@ -23,14 +23,14 @@ ActiveRecord::Schema.define(version: 20201127170421) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "aplications", force: :cascade do |t|
+  create_table "applications", force: :cascade do |t|
     t.bigint "user_id"
     t.string "title", null: false
     t.text "text", null: false
     t.integer "rating", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_aplications_on_user_id"
+    t.index ["user_id"], name: "index_applications_on_user_id"
   end
 
   create_table "chats", force: :cascade do |t|
@@ -65,5 +65,5 @@ ActiveRecord::Schema.define(version: 20201127170421) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "aplications", "users"
+  add_foreign_key "applications", "users"
 end
