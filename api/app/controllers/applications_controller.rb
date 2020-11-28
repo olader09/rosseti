@@ -56,7 +56,7 @@ class ApplicationsController < APIBaseController
   protected
 
   def default_application_fields
-    %i[name text rating]
+    %i[title text]
   end
 
   def update_application_params
