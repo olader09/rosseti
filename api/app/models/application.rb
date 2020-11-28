@@ -27,8 +27,8 @@ class Application < ApplicationRecord
       chat: {
         id: chat.id
       },
-      liked_by:{
-        users.to_json
+      liked_by: {
+        users
       }
     }
   end
