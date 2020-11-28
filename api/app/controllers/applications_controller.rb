@@ -32,7 +32,9 @@ class ApplicationsController < APIBaseController
   end
 
   def create
-    @application = Application.create(create_application_params, user_id: current_user.id)
+    @application = Application.new(create_application_params)
+    @application.user_id = current_user.id
+    @application.save
     if @application.errors.blank?
       render json: @application, status: :ok
     else
