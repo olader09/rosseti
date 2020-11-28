@@ -3,7 +3,7 @@ class ApplicationsController < APIBaseController
   before_action :auth_user
 
   def index
-    @applications.order(:id).page(params[:page])
+    @applications = @applications.order(:id).page(params[:page])
     if @applications.empty?
       render status: 204
     else

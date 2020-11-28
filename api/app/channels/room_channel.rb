@@ -14,7 +14,7 @@ class RoomChannel < ApplicationCable::Channel
     picture = data['picture']
     content = data['message']
     time_now = Time.zone.now
-    return if type_message != 0 && content.blank?
+    return if type_message != 1 && content.blank?
 
     return unless MESSAGE_TYPES.include?(type_message)
     
@@ -23,7 +23,7 @@ class RoomChannel < ApplicationCable::Channel
     User.find(new_message.sender_id).update(count_messages: current_user.messages.count)
     return unless new_message.save
 
-    ActionCable.server.broadcast room_id, message: content, picture: new_message.picture, type_message: type_message, sender_type: new_message.sender_type, sender_id: new_message.sender_id, created_at: new_message.created_at
+    ActionCable.server.broadcast room_id, message: new_message.content, picture: new_message.picture, type_message: new_message.type_message, sender_type: new_message.sender_type, sender_id: new_message.sender_id, created_at: new_message.created_at
    
   end
 
