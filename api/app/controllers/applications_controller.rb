@@ -31,7 +31,7 @@ class ApplicationsController < APIBaseController
   end
 
   def create
-    @application = Application.new(create_application_params)
+    @application = @application.new(create_application_params)
     @application.user_id = current_user.id
     @application.save
     if @application.errors.blank?
@@ -110,7 +110,7 @@ class ApplicationsController < APIBaseController
   protected
 
   def default_application_fields
-    %i[title category problem decision impact]
+    %i[title category problem decision impact economy other_authors expenses stages file direction_activity]
   end
 
   def update_application_params
