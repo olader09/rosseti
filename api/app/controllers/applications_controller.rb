@@ -101,7 +101,7 @@ class ApplicationsController < APIBaseController
         total_score = 0.0
         scores.each {|score| total_score += score}
         total_score = (total_score / 3) * 100 / 73
-        
+
         @application.update(uniqueness: total_score)
         render json: similars
       end
@@ -110,7 +110,7 @@ class ApplicationsController < APIBaseController
   protected
 
   def default_application_fields
-    %i[title category problem decision impact economy other_authors expenses stages file]
+    %i[title category problem decision impact economy other_authors expenses stages file direction_activity]
   end
 
   def update_application_params
