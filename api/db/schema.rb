@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201128120537) do
+ActiveRecord::Schema.define(version: 20201128130028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20201128120537) do
     t.string "education", default: ""
     t.integer "count_messages", default: 0
     t.integer "count_approved", default: 0
+    t.string "post", default: ""
   end
 
   add_foreign_key "applications", "users"
