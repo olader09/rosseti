@@ -7,10 +7,10 @@ class Application < ApplicationRecord
   def as_json(_options = {})
     {
       id: id,
-      title: title
-      text: text
+      title: title,
+      text: text,
       updated_at: updated_at,
-      chat_id: chat.id
+      chat_id: chat.id,
       count_likes: 0
     }
   end
