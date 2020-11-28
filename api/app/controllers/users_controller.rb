@@ -29,13 +29,13 @@ class UsersController < APIBaseController
   def load_user
     @user = current_user
   end
-  
+
   def verifing_user
     current_user.update(verify: true) if current_user.verify == false
   end
 
   def default_user_fields
-    %i[name surname second_name push_token unit]
+    %i[name surname second_name push_token unit birthday education start_working]
   end
 
   def update_user_params

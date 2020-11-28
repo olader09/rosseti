@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201127170421) do
+ActiveRecord::Schema.define(version: 20201128120537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 20201127170421) do
 
   create_table "chats", force: :cascade do |t|
     t.bigint "application_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["application_id"], name: "index_chats_on_application_id"
   end
 
@@ -63,6 +65,11 @@ ActiveRecord::Schema.define(version: 20201127170421) do
     t.boolean "verify", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "start_working"
+    t.date "birthday"
+    t.string "education", default: ""
+    t.integer "count_messages", default: 0
+    t.integer "count_approved", default: 0
   end
 
   add_foreign_key "applications", "users"
