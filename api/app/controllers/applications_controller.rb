@@ -107,6 +107,33 @@ class ApplicationsController < APIBaseController
       end
   end
 
+  def check_uniq
+    problem = params[:problem]
+    title = params[:title]
+    similars = Application.search({
+      min_score: 2,
+      query: {
+        dis_max: {
+          queries: [
+            { match: { title: title } },
+            { match: { problem: problem } }
+          ],
+          tie_breaker: 0.5
+        }
+      }}).to_a
+      similars.delete_at(0)
+      if similars.empty?
+        render json: {"uniqueness": 100}
+      else
+        similars = similars.take(3)
+        scores = similars.map {|similar| similar['_score']}
+        total_score = 0.0
+        scores.each {|score| total_score += score}
+        total_score = (total_score * 100 / 76) + 70
+        render json: {"uniqueness": total_score}
+      end
+  end
+
   protected
 
   def default_application_fields

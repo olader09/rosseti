@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     put :like, to: 'applications#like', on: :collection
     put :dislike, to: 'applications#dislike', on: :collection
     get :similar, to: 'applications#similar', on: :member
+    get :check_uniq, on: :collection
   end
   resources :messages
   resources :chats
