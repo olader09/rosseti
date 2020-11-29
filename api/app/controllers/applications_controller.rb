@@ -88,7 +88,7 @@ class ApplicationsController < APIBaseController
             { match: { title: title } },
             { match: { problem: problem } }
           ],
-          tie_breaker: 0.5
+          tie_breaker: 1
         }
       }}).to_a
       similars.delete_at(0)
@@ -100,7 +100,7 @@ class ApplicationsController < APIBaseController
         scores = similars.map {|similar| similar['_score']}
         total_score = 0.0
         scores.each {|score| total_score += score}
-        total_score = 100 - (total_score * 100 / 80)
+        total_score = 100 - (total_score * 100 / 50)
 
         @application.update(uniqueness: total_score)
         render json: similars
@@ -129,7 +129,7 @@ class ApplicationsController < APIBaseController
         total_score = 0.0
         scores.each {|score| total_score += score}
         p total_score
-        total_score = 100 - (total_score * 100 / 80)
+        total_score = 100 - (total_score * 100 / 30)
         render json: {"uniqueness": total_score.round}
       end
   end
