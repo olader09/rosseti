@@ -17,7 +17,7 @@ class RoomChannel < ApplicationCable::Channel
     chat = Chat.find(chat_id)
     application = Application.find(chat.application.id)
 
-    p popularity = ((chat.messages.pluck(:sender_id).uniq.count) / (application.count_likes + 1)) * 100
+    p popularity = ((application.count_likes + 1) / (chat.messages.pluck(:sender_id).uniq.count)) * 100
     popularity = 100 if popularity > 100
     
     return if type_message != 1 && content.blank?
