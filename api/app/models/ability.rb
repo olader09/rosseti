@@ -11,7 +11,7 @@ class Ability
 
     if user&.class == User
       can :manage, User, id: user.id
-      can %i[liking similar create read], Application
+      can %i[liking similar create read check_uniq], Application
       can :liking, Application
       can :read, Chat
       can :read, Message
