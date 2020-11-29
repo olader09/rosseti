@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   post :user_token, to: 'user_token#create'
   resource :user
 
-  post :admin_token, to: 'user_token#create'
+  post :admin_token, to: 'admin_token#create'
   resource :admin
 
   resources :applications do
