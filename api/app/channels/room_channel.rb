@@ -15,8 +15,7 @@ class RoomChannel < ApplicationCable::Channel
     content = data['message']
     time_now = Time.zone.now
     chat = Chat.find(chat_id)
-    application = chat.application
-    name = 
+    application = Application.find(chat.application.id)
 
     popularity = ((chat.messages.pluck(:sender_id).uniq.count) / (application.count_likes + 1) * 100)
     popularity = 100 if popularity > 100
