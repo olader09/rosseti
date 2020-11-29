@@ -16,6 +16,7 @@ class RoomChannel < ApplicationCable::Channel
     time_now = Time.zone.now
     chat = Chat.find(chat_id)
     application = chat.application
+    name = 
 
     popularity = ((chat.messages.pluck(:sender_id).uniq.count) / (application.count_likes + 1) * 100)
     popularity = 100 if popularity > 100
@@ -25,7 +26,7 @@ class RoomChannel < ApplicationCable::Channel
     return unless MESSAGE_TYPES.include?(type_message)
     
 
-    new_message = Message.new(content: content, sender: current_user, sender_name: "#{current_user.name} #{current_user.surname.at(0)}.#{current_user.second_name.at(0)}" chat_id: chat_id, picture: picture, type_message: type_message)
+    new_message = Message.new(content: content, sender: current_user, sender_name: "#{current_user.name} #{current_user.surname.at(0)}.#{current_user.second_name.at(0)}", chat_id: chat_id, picture: picture, type_message: type_message)
     current_user.update(count_messages: current_user.messages.count)
     application.update(popularity: popularity)
     return unless new_message.save
