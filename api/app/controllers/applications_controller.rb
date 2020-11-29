@@ -120,7 +120,7 @@ class ApplicationsController < APIBaseController
   end
 
   def create_application_params
-    params.permit(
+    params.required(:application).permit(
       *default_application_fields
     )
   end
