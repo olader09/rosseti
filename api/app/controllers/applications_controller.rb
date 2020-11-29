@@ -137,7 +137,7 @@ class ApplicationsController < APIBaseController
   protected
 
   def default_application_fields
-    %i[title category problem decision impact economy other_authors expenses stages file direction_activity]
+    %i[title category problem decision impact economy other_authors expenses stages file direction_activity status]
   end
 
   def update_application_params
