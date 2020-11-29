@@ -21,7 +21,6 @@ class Application < ApplicationRecord
   def as_json(_options = {})
     {
       id: id,
-      author_id: user.id,
       status: status,
       title: title,
       problem: problem,
@@ -30,7 +29,7 @@ class Application < ApplicationRecord
       economy: economy,
       category: category,
       direction_activity: direction_activity,
-      other_authors: other_authors,
+      other_authors: user,
       expenses: expenses,
       stages: stages,
       file: file,
