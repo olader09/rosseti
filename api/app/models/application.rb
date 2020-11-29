@@ -22,6 +22,7 @@ class Application < ApplicationRecord
     {
       id: id,
       title: title,
+      status: status,
       problem: problem,
       decision: decision,
       impact: impact,
