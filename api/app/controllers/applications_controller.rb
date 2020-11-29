@@ -110,7 +110,7 @@ class ApplicationsController < APIBaseController
   def check_uniq
     problem = params[:problem]
     title = params[:title]
-    similars = Application.search({
+    similars_elastic = Application.search({
       min_score: 2,
       query: {
         dis_max: {
@@ -120,10 +120,11 @@ class ApplicationsController < APIBaseController
           ],
           tie_breaker: 1
         }
-      }}).to_a
-      if similars.empty?
+      }})
+      if similars_elastic.to_a.empty?
         render json: {"uniqueness": 100}
       else
+        similars = similars_elastic.to_a
         similars = similars.take(3)
         scores = similars.map {|similar| similar['_score']}
         total_score = 0.0
@@ -131,7 +132,7 @@ class ApplicationsController < APIBaseController
         p total_score
         total_score = 100 - (total_score * 100 / 50)
         render json: {"uniqueness": total_score.round,
-                      "similars": similars.records}
+                      "similars": similars_elastic.records}
       end
   end
 
