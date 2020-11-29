@@ -100,7 +100,7 @@ class ApplicationsController < APIBaseController
         scores = similars.map {|similar| similar['_score']}
         total_score = 0.0
         scores.each {|score| total_score += score}
-        total_score = 100 - (total_score * 100 / 50)
+        total_score = 100 - (total_score * 100 / 80)
 
         @application.update(uniqueness: total_score)
         render json: similars
