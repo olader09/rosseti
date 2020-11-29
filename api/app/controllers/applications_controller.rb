@@ -118,7 +118,7 @@ class ApplicationsController < APIBaseController
             { match: { title: title } },
             { match: { problem: problem } }
           ],
-          tie_breaker: 0.5
+          tie_breaker: 1
         }
       }}).to_a
       if similars.empty?
