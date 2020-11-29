@@ -17,7 +17,7 @@ class RoomChannel < ApplicationCable::Channel
     chat = Chat.find(chat_id)
     application = Application.find(chat.application.id)
 
-    popularity = ((chat.messages.pluck(:sender_id).uniq.count) / (application.count_likes + 1) * 100)
+    p popularity = ((chat.messages.pluck(:sender_id).uniq.count) / (application.count_likes + 1) * 100)
     popularity = 100 if popularity > 100
     
     return if type_message != 1 && content.blank?
@@ -27,7 +27,7 @@ class RoomChannel < ApplicationCable::Channel
 
     new_message = Message.new(content: content, sender: current_user, sender_name: "#{current_user.second_name} #{current_user.surname.at(0)}.#{current_user.name.at(0)}", chat_id: chat_id, picture: picture, type_message: type_message)
     current_user.update(count_messages: current_user.messages.count)
-    application.update(popularity: popularity)
+    p application.update(popularity: popularity)
     return unless new_message.save
 
     ActionCable.server.broadcast room_id, message: new_message.content, picture: new_message.picture, type_message: new_message.type_message, sender_type: new_message.sender_type, sender_id: new_message.sender_id, sender_name: new_message.sender_name, created_at: new_message.created_at
