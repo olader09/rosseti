@@ -130,7 +130,8 @@ class ApplicationsController < APIBaseController
         scores.each {|score| total_score += score}
         p total_score
         total_score = 100 - (total_score * 100 / 50)
-        render json: {"uniqueness": total_score.round}
+        render json: {"uniqueness": total_score.round,
+                      "similars": similars.to_json}
       end
   end
 
