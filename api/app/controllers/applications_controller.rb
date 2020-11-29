@@ -81,7 +81,7 @@ class ApplicationsController < APIBaseController
     problem = @application.problem
     title = @application.title
     similars = Application.search({
-      min_score: 2,
+      min_score: 4,
       query: {
         dis_max: {
           queries: [
@@ -111,7 +111,7 @@ class ApplicationsController < APIBaseController
     problem = params[:problem]
     title = params[:title]
     similars_elastic = Application.search({
-      min_score: 2,
+      min_score: 4,
       query: {
         dis_max: {
           queries: [
