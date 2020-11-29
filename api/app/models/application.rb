@@ -21,7 +21,7 @@ class Application < ApplicationRecord
   def as_json(_options = {})
     {
       id: id,
-      author_id: user.id
+      author_id: user.id,
       status: status,
       title: title,
       problem: problem,
