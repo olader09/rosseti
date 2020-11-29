@@ -121,7 +121,6 @@ class ApplicationsController < APIBaseController
           tie_breaker: 0.5
         }
       }}).to_a
-      similars.delete_at(0)
       if similars.empty?
         render json: {"uniqueness": 100}
       else
