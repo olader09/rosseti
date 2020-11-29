@@ -25,12 +25,12 @@ class RoomChannel < ApplicationCable::Channel
     return unless MESSAGE_TYPES.include?(type_message)
     
 
-    new_message = Message.new(content: content, sender: current_user, chat_id: chat_id, picture: picture, type_message: type_message)
+    new_message = Message.new(content: content, sender: current_user, sender_name: "#{current_user.name} #{current_user.surname.at(0)}.#{current_user.second_name.at(0)}" chat_id: chat_id, picture: picture, type_message: type_message)
     current_user.update(count_messages: current_user.messages.count)
     application.update(popularity: popularity)
     return unless new_message.save
 
-    ActionCable.server.broadcast room_id, message: new_message.content, picture: new_message.picture, type_message: new_message.type_message, sender_type: new_message.sender_type, sender_id: new_message.sender_id, created_at: new_message.created_at
+    ActionCable.server.broadcast room_id, message: new_message.content, picture: new_message.picture, type_message: new_message.type_message, sender_type: new_message.sender_type, sender_id: new_message.sender_id, sender_name: new_message.sender_name, created_at: new_message.created_at
    
   end
 
