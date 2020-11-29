@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   post :user_token, to: 'user_token#create'
   resource :user
 
+  post :admin_token, to: 'user_token#create'
+  resource :admin
+
   resources :applications do
     put :like, to: 'applications#like', on: :collection
     put :dislike, to: 'applications#dislike', on: :collection
