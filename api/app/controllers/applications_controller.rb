@@ -33,7 +33,7 @@ class ApplicationsController < APIBaseController
   def create
     @application = Application.new(create_application_params)
     @application.user_id = current_user.id
-    p @application.uniqueness = @redis.get('temp_uniq_rate').to_f.round
+    @application.uniqueness = @redis.get('temp_uniq_rate').to_i
     @application.save
     if @application.errors.blank?
       render json: @application, status: :ok
@@ -123,6 +123,7 @@ class ApplicationsController < APIBaseController
         }
       }})
       if similars_elastic.to_a.empty?
+        @redis.set('temp_uniq_rate', 100)
         render json: {"uniqueness": 100}
       else
         similars = similars_elastic.to_a
@@ -130,10 +131,10 @@ class ApplicationsController < APIBaseController
         scores = similars.map {|similar| similar['_score']}
         total_score = 0.0
         scores.each {|score| total_score += score}
-        p total_score
-        p total_score = 100 - (total_score * 100 / 70)
-        @redis.set('temp_uniq_rate', total_score)
-        p render json: {"uniqueness": total_score.round,
+        total_score
+        total_score = 100 - (total_score * 100 / 70)
+        @redis.set('temp_uniq_rate', total_score.round)
+        render json: {"uniqueness": total_score.round,
                       "similars": similars_elastic.records}
       end
   end
