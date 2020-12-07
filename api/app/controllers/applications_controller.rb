@@ -33,7 +33,7 @@ class ApplicationsController < APIBaseController
   def create
     @application = Application.new(create_application_params)
     @application.user_id = current_user.id
-    @application.uniqueness = @redis.get('temp_uniq_rate').to_i
+    @application.uniqueness = @redis.get('temp_uniq_rate').to_f.round
     @application.save
     if @application.errors.blank?
       render json: @application, status: :ok
