@@ -22,6 +22,6 @@ class APIBaseController < ActionController::API
 
   def init_redis
     @redis = Redis.new(host: 'redis', port: 6379, db: 15)
-    @redis.set('temp_users_push_tokens', []) if @redis.get('temp_users_push_tokens').nil?
+    @redis.set('temp_uniq_rate', 0) if @redis.get('temp_uniq_rate').nil?
   end
 end
